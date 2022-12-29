@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weather App</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./src/styles.css" />
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <main class="App">
+      <section class="weather-app">
+        <form action="/submit" class="weather-search">
+          <input type="text" placeholder="Your City" class="weather-search-input" required/>
+          <input type="submit" class="submit-button" value="Submit"/>
+        </form>
+        <div class="city-current">
+          <h1 class="city-name"></h1>
+          <div class="current-weather">
+            <div class="current-temp">
+              <h2 class="temp"></h2>
+                <span class="units">
+                  <a href="#" class="celsius">°C</a>
+                  |
+                  <a href="#" class="fahrenheit">°F</a>
+                </span>
+            </div>
+          
+          <h4 class="current-minmax">
+            <span class="current-min">1°C</span> 
+            / 
+            <span class="current-max">8°C</span>
+          </h4>
+          <div class="weather--icon">&#x1F324</div>
+          <p class="current-time"></p>
+        </div>
+      </section>
+
+      <section class="weather-forecast">
+        <div class="forecast-items">
+          <h5 class="forecast-day">Mon</h2>
+          <h6 class="forecast-temp">8°C</h6>
+          <div class="forecast--icon">&#x1F324</div>
+        </div>
+        <div class="forecast-items">
+          <h5 class="forecast-day">Tue</h2>
+          <h6 class="forecast-temp">8°C</h6>
+          <div class="forecast--icon">&#x1F327</div>
+        </div>
+        <div class="forecast-items">
+          <h5 class="forecast-day">Wed</h2>
+          <h6 class="forecast-temp">8°C</h6>
+          <div class="forecast--icon">&#x1F327</div>
+        </div>
+        <div class="forecast-items">
+          <h5 class="forecast-day">Thu</h2>
+          <h6 class="forecast-temp">8°C</h6>
+          <div class="forecast--icon">&#x1F327</div>
+        </div>
+        <div class="forecast-items">
+          <h5 class="forecast-day">Fri</h2>
+          <h6 class="forecast-temp">8°C</h6>
+          <div class="forecast--icon">&#x1F327</div>
+        </div>
+      </section>
+    </main>
+
+    <script src="src/script.js"></script>
+  </body>
+</html>
