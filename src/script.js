@@ -49,7 +49,7 @@ function showTemperature(response) {
   let iconData = response.data.weather[0].icon;
   let weatherIcon = document.querySelector(".weather--icon");
   weatherIcon.setAttribute(
-    "src", 
+    "src",
     `http://openweathermap.org/img/wn/${iconData}@2x.png`
   );
 }
