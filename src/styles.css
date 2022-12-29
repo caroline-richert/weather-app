@@ -87,10 +87,21 @@
   .current-minmax {
     color: lightgray;
   }
+.weather--further-info {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+}
+
+.weather-weather {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-right: auto;
+}
   
   .weather--icon {
     font-size: 50px;
-    text-align: center;
   }
   
   .current-time {

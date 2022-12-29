@@ -42,6 +42,10 @@ function showTemperature(response) {
   let maxElement = document.querySelector(".current-max");
   let maxData = Math.round(response.data.main.temp_max);
   maxElement.textContent = maxData;
+  let weatherDesription = document.querySelector(".weather-description");
+  weatherDesription.textContent = response.data.weather[0].description;
+  let windspeed = document.querySelector(".weather-wind");
+  windspeed.textContent = Math.round(response.data.wind.speed);
 }
 
 // current Date and Time
