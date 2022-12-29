@@ -46,6 +46,12 @@ function showTemperature(response) {
   weatherDesription.textContent = response.data.weather[0].description;
   let windspeed = document.querySelector(".weather-wind");
   windspeed.textContent = Math.round(response.data.wind.speed);
+  let iconData = response.data.weather[0].icon;
+  let weatherIcon = document.querySelector(".weather--icon");
+  weatherIcon.setAttribute(
+    "src", 
+    `http://openweathermap.org/img/wn/${iconData}@2x.png`
+  );
 }
 
 // current Date and Time
