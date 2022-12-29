@@ -1,5 +1,3 @@
-import axios from "package.json";
-
 // Default City name
 let city = "Berlin";
 
