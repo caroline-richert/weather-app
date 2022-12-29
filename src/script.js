@@ -40,7 +40,7 @@ function showTemperature(response) {
   let minData = Math.round(response.data.main.temp_min);
   minElement.textContent = minData;
   let maxElement = document.querySelector(".current-max");
-  let axData = Math.round(response.data.main.temp_max);
+  let maxData = Math.round(response.data.main.temp_max);
   maxElement.textContent = maxData;
 }
 
