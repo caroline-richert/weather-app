@@ -34,7 +34,8 @@ function showTemperature(response) {
   let cityElement = document.querySelector(".city-name");
   cityElement.textContent = response.data.name;
   let tempElement = document.querySelector(".temp");
-  let tempData = Math.round(response.data.main.temp);
+  celsiusTemp = Math.round(response.data.main.temp)
+  let tempData = celsiusTemp;
   tempElement.textContent = tempData;
   let minElement = document.querySelector(".current-min");
   let minData = Math.round(response.data.main.temp_min);
@@ -53,6 +54,28 @@ function showTemperature(response) {
     `http://openweathermap.org/img/wn/${iconData}@2x.png`
   );
 }
+
+// Toogle Temperature Units
+function displayFahrenheitTemp(event) {
+  event.preventDefault();
+  let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
+  let temperatureElement = document.querySelector(".temp");
+  temperatureElement.textContent = Math.round(fahrenheitTemp);
+}
+
+function displayCelsiusTemp(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector(".temp");
+  temperatureElement.textContent = celsiusTemp;
+}
+
+let celsiusTemp
+
+let fahrenheitLink = document.querySelector(".fahrenheit");
+fahrenheitLink.addEventListener('click', displayFahrenheitTemp)
+
+let celsiusLink = document.querySelector(".celsius");
+celsiusLink.addEventListener('click', displayCelsiusTemp)
 
 // current Date and Time
 let dateElement = document.querySelector(".current-time");
