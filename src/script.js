@@ -17,11 +17,11 @@ function searchCity(event) {
 // Call weather API
 function fetchWeatherInformation(city) {
   let apiUnit = "metric";
-  let apiKey = "f38202399f30f738fecfffbd7ad57622";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}`;
+  let apiKey = "oefc7407ecc6003ed89266cf0ba020bt";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}`;
 
   axios
-    .get(`${apiUrl}&&appid=${apiKey}&units=${apiUnit}`)
+    .get(`${apiUrl}&key=${apiKey}&units=${apiUnit}`)
     .then(showTemperature)
     .catch((error) => {
       console.log("API error", error);
@@ -50,33 +50,42 @@ function displayForecast() {
   forecastElement.innerHTML = forecastHTML;
 }
 
+function getForecastData(coordinates) {
+  console.log(coordinates);
+
+  let apiUnit = "metric";
+  let apiKey = "oefc7407ecc6003ed89266cf0ba020bt";
+
+  let forecastAPI =
+  `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.lon}&lat=${coordinates.lat}&key=${apiKey}&units=${apiUnit}`
+  
+
+console.log("Forecast API", forecastAPI)
+}
+
 // Handle API data
 function showTemperature(response) {
   console.log("response", response.data);
   let cityElement = document.querySelector(".city-name");
-  cityElement.textContent = response.data.name;
+  cityElement.textContent = response.data.city;
   let tempElement = document.querySelector(".temp");
-  celsiusTemp = Math.round(response.data.main.temp)
+  celsiusTemp = Math.round(response.data.temperature.current)
   let tempData = celsiusTemp;
   tempElement.textContent = tempData;
-  let minElement = document.querySelector(".current-min");
-  let minData = Math.round(response.data.main.temp_min);
-  minElement.textContent = minData;
-  let maxElement = document.querySelector(".current-max");
-  let maxData = Math.round(response.data.main.temp_max);
-  maxElement.textContent = maxData;
   let weatherDesription = document.querySelector(".weather-description");
-  weatherDesription.textContent = response.data.weather[0].description;
+  weatherDesription.textContent = response.data.condition.description;
   let windspeed = document.querySelector(".weather-wind");
-  windspeed.textContent = Math.round(response.data.wind.speed);
-  let iconData = response.data.weather[0].icon;
+  windspeed.textContent = Math.round(response.data.wind.speed) + " kmh";
+  let iconData = response.data.condition.icon;
   let weatherIcon = document.querySelector(".weather--icon");
   weatherIcon.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${iconData}@2x.png`
+    `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${iconData}.png`
   );
 
-  displayForecast()
+  getForecastData(response.data.coordinates);
+
+  displayForecast();
 }
 
 // Toogle Temperature Units
