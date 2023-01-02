@@ -28,6 +28,28 @@ function fetchWeatherInformation(city) {
     });
 }
 
+// SCript for forecast
+
+function displayForecast() {
+  let forecastElement = document.querySelector(".weather-forecast");
+
+  let forecastHTML = "";
+  let days = ["Mo", "Die", "Mi", "Do", "Fr"];
+
+  days.forEach(function(day) {
+    forecastHTML = forecastHTML +
+    `<div class="forecast-items">
+      <h5 class="forecast-day">${day}</h2>
+      <h6 class="forecast-temp">8°C</h6>
+      <div class="forecast--icon">&#x1F324</div>
+    </div>`;
+  })
+
+  
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
 // Handle API data
 function showTemperature(response) {
   console.log("response", response.data);
@@ -53,6 +75,8 @@ function showTemperature(response) {
     "src",
     `http://openweathermap.org/img/wn/${iconData}@2x.png`
   );
+
+  displayForecast()
 }
 
 // Toogle Temperature Units
@@ -104,3 +128,6 @@ function formatDate(date) {
   let day = days[currentDay];
   return `${day} ${hours}:${minutes}`;
 }
+
+
+
