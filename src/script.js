@@ -1,5 +1,7 @@
-// Default City name
+// Global variables with default city
 let city = "Berlin";
+let apiUnit = "metric";
+let apiKey = "oefc7407ecc6003ed89266cf0ba020bt";
 
 // Call API with default city
 fetchWeatherInformation(city);
@@ -16,8 +18,6 @@ function searchCity(event) {
 
 // Call weather API
 function fetchWeatherInformation(city) {
-  let apiUnit = "metric";
-  let apiKey = "oefc7407ecc6003ed89266cf0ba020bt";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}`;
 
   axios
@@ -30,42 +30,43 @@ function fetchWeatherInformation(city) {
 
 // SCript for forecast
 
-function displayForecast() {
-  let forecastElement = document.querySelector(".weather-forecast");
+function fetchForecastInformation(coordinates) {
 
+  let forecastAPI =
+    `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}`
+
+  axios
+    .get(`${forecastAPI}&key=${apiKey}&units=${apiUnit}`)
+    .then(displayForecast)
+    .catch((error) => {
+      console.log("API error", error);
+    });
+}
+
+
+function displayForecast(response) {
+  console.log("Daily Forecast data", response.data.daily);
+  let forecastElement = document.querySelector(".weather-forecast");
   let forecastHTML = "";
   let days = ["Mo", "Die", "Mi", "Do", "Fr"];
 
-  days.forEach(function(day) {
+  days.forEach(function (day) {
     forecastHTML = forecastHTML +
-    `<div class="forecast-items">
+      `<div class="forecast-items">
       <h5 class="forecast-day">${day}</h2>
       <h6 class="forecast-temp">8°C</h6>
       <div class="forecast--icon">&#x1F324</div>
     </div>`;
   })
 
-  
-
   forecastElement.innerHTML = forecastHTML;
 }
 
-function getForecastData(coordinates) {
-  console.log(coordinates);
 
-  let apiUnit = "metric";
-  let apiKey = "oefc7407ecc6003ed89266cf0ba020bt";
-
-  let forecastAPI =
-  `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.lon}&lat=${coordinates.lat}&key=${apiKey}&units=${apiUnit}`
-  
-
-console.log("Forecast API", forecastAPI)
-}
 
 // Handle API data
 function showTemperature(response) {
-  console.log("response", response.data);
+  console.log("Weather", response.data);
   let cityElement = document.querySelector(".city-name");
   cityElement.textContent = response.data.city;
   let tempElement = document.querySelector(".temp");
@@ -83,9 +84,7 @@ function showTemperature(response) {
     `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${iconData}.png`
   );
 
-  getForecastData(response.data.coordinates);
-
-  displayForecast();
+  fetchForecastInformation(response.data.coordinates);
 }
 
 // Toogle Temperature Units
