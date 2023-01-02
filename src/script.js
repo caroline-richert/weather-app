@@ -46,16 +46,18 @@ function fetchForecastInformation(coordinates) {
 
 function displayForecast(response) {
   console.log("Daily Forecast data", response.data.daily);
+  
+  let forecastData = response.data.daily;
   let forecastElement = document.querySelector(".weather-forecast");
   let forecastHTML = "";
   let days = ["Mo", "Die", "Mi", "Do", "Fr"];
 
-  days.forEach(function (day) {
+  forecastData.forEach(function (forecastDay) {
     forecastHTML = forecastHTML +
       `<div class="forecast-items">
-      <h5 class="forecast-day">${day}</h2>
-      <h6 class="forecast-temp">8°C</h6>
-      <div class="forecast--icon">&#x1F324</div>
+      <h5 class="forecast-day">${forecastDay.time}</h2>
+      <h6 class="forecast-temp">${Math.round(forecastDay.temperature.day)}°C</h6>
+      <img class="forecast--icon" src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${forecastDay.condition.icon}.png"/>
     </div>`;
   })
 
