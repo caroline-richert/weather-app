@@ -113,12 +113,23 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   box-shadow: 1px 1px 20px gray;
   margin-block: 7px;
+  padding-top: 5px;
   border-radius: 50%;
   width: 75px;
   height: 75px;
   text-align: center;
+}
+
+.forecast--temp {
+  margin-bottom: 2px;
+}
+
+.forecast--icon {
+  height: 40px;
+  width: 40px;
 }
 
 .host {

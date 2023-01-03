@@ -43,6 +43,15 @@ function fetchForecastInformation(coordinates) {
     });
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000 );
+  let day = date.getDay()
+  let days = ["Mo", "Die", "Mi", "Do", "Fr", "Sa", "So"];
+
+
+  return days[day];
+};
+
 
 function displayForecast(response) {
   console.log("Daily Forecast data", response.data.daily);
@@ -50,21 +59,20 @@ function displayForecast(response) {
   let forecastData = response.data.daily;
   let forecastElement = document.querySelector(".weather-forecast");
   let forecastHTML = "";
-  let days = ["Mo", "Die", "Mi", "Do", "Fr"];
 
-  forecastData.forEach(function (forecastDay) {
+  forecastData.forEach(function (forecastDay, index) {
+    if(index < 5 ){
     forecastHTML = forecastHTML +
       `<div class="forecast-items">
-      <h5 class="forecast-day">${forecastDay.time}</h2>
+      <h5 class="forecast-day">${formatDay(forecastDay.time)}</h2>
       <h6 class="forecast-temp">${Math.round(forecastDay.temperature.day)}°C</h6>
       <img class="forecast--icon" src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${forecastDay.condition.icon}.png"/>
     </div>`;
+  };
   })
 
   forecastElement.innerHTML = forecastHTML;
 }
-
-
 
 // Handle API data
 function showTemperature(response) {
