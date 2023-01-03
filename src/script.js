@@ -86,7 +86,7 @@ function showTemperature(response) {
   let weatherDesription = document.querySelector(".weather-description");
   weatherDesription.textContent = response.data.condition.description;
   let windspeed = document.querySelector(".weather-wind");
-  windspeed.textContent = Math.round(response.data.wind.speed) + " kmh";
+  windspeed.textContent = "wind speed: " + Math.round(response.data.wind.speed) + " kmh";
   let iconData = response.data.condition.icon;
   let weatherIcon = document.querySelector(".weather--icon");
   weatherIcon.setAttribute(
@@ -97,25 +97,6 @@ function showTemperature(response) {
   fetchForecastInformation(response.data.coordinates);
 }
 
-// Toogle Temperature Units
-function displayFahrenheitTemp(event) {
-  event.preventDefault();
-  let fahrenheitTemp = (celsiusTemp * 9) / 5 + 32;
-  let temperatureElement = document.querySelector(".temp");
-  temperatureElement.textContent = Math.round(fahrenheitTemp);
-}
-
-function displayCelsiusTemp(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector(".temp");
-  temperatureElement.textContent = celsiusTemp;
-}
-
-let celsiusTemp
-let fahrenheitLink = document.querySelector(".fahrenheit");
-fahrenheitLink.addEventListener('click', displayFahrenheitTemp)
-let celsiusLink = document.querySelector(".celsius");
-celsiusLink.addEventListener('click', displayCelsiusTemp)
 
 // current Date and Time
 let dateElement = document.querySelector(".current-time");
@@ -144,7 +125,7 @@ function formatDate(date) {
     "Saturday"
   ];
   let day = days[currentDay];
-  return `${day} ${hours}:${minutes}`;
+  return `Last updated: ${day} ${hours}:${minutes}`;
 }
 
 

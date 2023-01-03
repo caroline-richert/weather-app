@@ -66,23 +66,12 @@ body {
   font-size: 35px;
 }
 
-.units>a {
-  text-decoration: none;
+.celsius {
+  font-size: 15px;
+  padding-top: 5px;
   color: grey;
 }
 
-.units>a:hover {
-  color: darkblue;
-}
-
-.units>a:active {
-  color: white;
-}
-
-.units {
-  font-size: 15px;
-  padding-top: 5px;
-}
 
 .current-minmax {
   color: lightgray;
